@@ -1,0 +1,20 @@
+---
+version: "2.1"
+services:
+  nginx:
+    image: ghcr.io/linuxserver/nginx
+    container_name: webresume
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+    ports:
+      - 8005:80
+    volumes:
+      - ./config:/config
+      - ./webresume:/config/www
+    restart: unless-stopped
+networks:
+  default:
+    external:
+      name: https
